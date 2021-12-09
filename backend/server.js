@@ -4,7 +4,8 @@ const connectDatabase = require('./config/database')
 
 
 //handle Uncaught excetions
-
+//controla las excepciones de errores en el codigo. Por ejemplo que una variable no esté definida:
+//console.log(a)
 process.on('uncaughtException', err => {
     console.log(`ERROR: ${err.message}`)
     console.log('Shutting down due to uncaught Exception')
@@ -26,6 +27,7 @@ const server = app.listen(process.env.PORT, () => {
 
 //Handle Unhandled Promise rejections
 
+//maneja los errores de cuando el servidor se cae. Se puede comprobar poniendo mal la url del servidor
 process.on('unhandledRejection', err => {
     console.log(`ERROR: ${err.message}`)
     console.log('Shutting down the server due to Unhandled promise rejection')

@@ -5,10 +5,10 @@ const APIFeatures = require('../utils/apiFeatures')
 
 
 //create new product => /api/v1/admin/product/new
-
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
+   
+    req.body.user = req.user.id;
 
-    
     const product = await Product.create(req.body)
 
     res.status(201).json({
@@ -43,12 +43,16 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 })
 
 //get single product => /api/v1/product/:id
-
 exports.getSingleProduct = catchAsyncErrors(async (req, res, next)  => {
 
     const product = await Product.findById(req.params.id)
 
     if (!product) {
+        // return res.status(404).json({
+        //     success: false,
+        //     message: "product not found"
+        // }) esto se sustituye por la linea de abajo
+        // está creado para tener un control de errores mas sencillo
         return next(new ErrorHandler('Product not found', 404))
     }
 
@@ -75,7 +79,6 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 })
 
 //Delete Product   => /api/v1/admin/product/:id
-
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
     const product = await Product.findById(req.params.id)

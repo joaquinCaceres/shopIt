@@ -4,6 +4,7 @@ class APIFeatures {
         this.queryStr = queryStr
     }    
 
+    //utilizado para buscar por nombre. En getAllProducts return products which contain keyword
     search(){
         const keyword = this.queryStr.keyword ? { 
 

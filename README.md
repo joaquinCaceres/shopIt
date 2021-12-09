@@ -1,2 +1,2 @@
 # shopIt
-create ecommerce with MERN
+create ecommerce with MERN by Joaquín Cáceres 
