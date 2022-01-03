@@ -38,6 +38,23 @@ module.exports = (err, req, res, next) => {
         //aquí se podrían agregar todos los errores que queramos manejar. El lo que hace es enviar peticiones con postman 
         //y ver qué errores va devolviendo
 
+
+        //handling mongoose duplicate key erros
+        if( err.code == 11000){
+            const message = `Duplicate ${Object.keys(err.keyValue)} entered`
+            error = new ErrorHandler(message, 400)
+        }
+
+        if(err.name === 'JsonWebTokenError') {
+            const message = 'Json web token is invalid. Try again!'
+            error = new ErrorHandler(message, 400)
+        }
+
+        if(err.name === 'TokenExpiredError') {
+            const message = 'Json web token is expired. Try again!'
+            error = new ErrorHandler(message, 400)
+        }
+
         res.status(error.statusCode).json({
             success: false, 
             error: error.message || 'internal server error'

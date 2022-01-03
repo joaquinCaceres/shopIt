@@ -76,7 +76,7 @@ userSchema.methods.getJwtToken = function(){
     }) 
 }
 
-//generate password reset token
+//generate password reset token      
 userSchema.methods.getResetPasswordToken = function () {
 
     //generate token
